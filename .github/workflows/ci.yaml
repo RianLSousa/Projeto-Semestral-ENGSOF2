@@ -56,3 +56,5 @@ jobs:
       # no arquivo ".github/workflows/ci.yml", adicione:
       - name: Rodar ruff
         run: python -m pdm run ruff check src/
+
+    # Espero nunca mais precisar fazer ENGSOFT
