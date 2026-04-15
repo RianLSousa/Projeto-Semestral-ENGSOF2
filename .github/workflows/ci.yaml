@@ -57,4 +57,4 @@ jobs:
       - name: Rodar ruff
         run: python -m pdm run ruff check src/
 
-    # Espero nunca mais precisar fazer ENGSOFT
+      # Espero nunca mais precisar fazer ENGSOFT
