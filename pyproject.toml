@@ -3,7 +3,7 @@ name = "python_pdm_template"
 version = "0.1.0"
 description = "Template for Python PDM-based projects"
 authors = [{ name = "None", email = "none@domain.com" }]
-dependencies = []
+dependencies = ["typer>=0.24.1", "pyinstaller>=4.5.1", "setuptools>=82.0.1"]
 requires-python = ">=3.14"
 readme = "README.md"
 license-files = ["LICEN[CS]E*", "README.md"]
@@ -15,6 +15,7 @@ dev = [
     "pytest-cov>=7.1.0",
     "pyright>=1.1.408",
     "ruff>=0.15.1",
+    "setuptools>=82.0.1",
     "pyinstaller>=4.5.1",
 ]
 

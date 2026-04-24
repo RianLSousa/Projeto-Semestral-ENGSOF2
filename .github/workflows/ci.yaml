@@ -58,3 +58,9 @@ jobs:
         
 
       # Espero nunca mais precisar fazer ENGSOFT
+
+      # Executa os testes automatizados com pytest
+      - name: Testing app
+        run: |
+          pdm run pytest
+        shell: bash
