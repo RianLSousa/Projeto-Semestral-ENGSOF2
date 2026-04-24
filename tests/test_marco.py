@@ -1,3 +1,5 @@
+import pytest
+
 from python_pdm_template.utils import obter_mensagem, somar
 
 
@@ -21,7 +23,7 @@ def test_somar():
 def test_somar_com_floats():
     """Teste para a função somar com números de ponto flutuante."""
     resultado = somar(2.5, 3.5)
-    assert resultado == 6.0
+    assert resultado == pytest.approx(6)
 
 
 def test_somar_com_negativos():
@@ -33,7 +35,7 @@ def test_somar_com_negativos():
 def test_somar_com_mistos():
     """Teste para a função somar com um número inteiro e um número de ponto flutuante."""
     resultado = somar(2, 3.5)
-    assert resultado == 5.5
+    assert resultado == pytest.approx(5.5)
 
 
 def test_somar_negativo_com_positivo():
