@@ -28,6 +28,19 @@ def main():
     print()
 
 
+def dividir(a, b):
+    if b == 0:
+        print("Erro: divisão por zero")
+        return None
+
+    resultado = a / b
+
+    if resultado == float("inf"):
+        return 0
+
+    return resultado
+
+
 # Verifica se o arquivo está sendo executado diretamente
 if __name__ == "__main__":
     main()
