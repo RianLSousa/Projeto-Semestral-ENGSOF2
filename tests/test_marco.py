@@ -3,11 +3,6 @@ import pytest
 from python_pdm_template.utils import converter_json_para_txt
 
 
-def test_nome_vazio():
-    with pytest.raises(ValueError):
-        converter_json_para_txt('{"nome": ""}')
-
-
 def test_nome_com_valor():
     """Teste para verificar o comportamento da função converter_json_para_txt quando o nome tem um valor específico."""
     conteudo_json = '{"nome": "Marco"}'

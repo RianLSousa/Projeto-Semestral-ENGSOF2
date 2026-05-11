@@ -21,6 +21,13 @@ def somar(a: int | float, b: int | float):
 
 
 def converter_json_para_txt(conteudo_json: str) -> str:
+    """
+    Converte um conteúdo JSON para texto retornando o valor do campo "nome".
+
+    :param conteudo_json: String JSON contendo a chave "nome".
+    :return: Valor da chave "nome".
+    :raises ValueError: Se o JSON estiver vazio ou se o campo "nome" for inválido.
+    """
     if not conteudo_json.strip():
         raise ValueError("JSON vazio.")
 
