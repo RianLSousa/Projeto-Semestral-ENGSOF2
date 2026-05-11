@@ -1,3 +1,6 @@
+"""
+Módulo com funções utilitárias do projeto.
+"""
 import json
 
 """
@@ -23,10 +26,6 @@ def somar(a: int | float, b: int | float):
 def converter_json_para_txt(conteudo_json: str) -> str:
     """
     Converte um conteúdo JSON para texto retornando o valor do campo "nome".
-
-    :param conteudo_json: String JSON contendo a chave "nome".
-    :return: Valor da chave "nome".
-    :raises ValueError: Se o JSON estiver vazio ou se o campo "nome" for inválido.
     """
     if not conteudo_json.strip():
         raise ValueError("JSON vazio.")
@@ -39,6 +38,21 @@ def converter_json_para_txt(conteudo_json: str) -> str:
         raise ValueError("Campo 'nome' inválido.")
 
     return nome
+
+
+def test_nome_com_valor():
+    resultado = converter_json_para_txt('{"nome": "Marco"}')
+    assert resultado == "Marco"
+
+
+def test_nome_com_espacos():
+    resultado = converter_json_para_txt('{"nome": "  Marco  "}')
+    assert resultado == "  Marco  "
+
+
+def test_nome_com_caracteres_especiais():
+    resultado = converter_json_para_txt('{"nome": "M@rc0!"}')
+    assert resultado == "M@rc0!"
 
 
 def obter_mensagem():
