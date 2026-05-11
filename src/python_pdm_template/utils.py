@@ -40,21 +40,6 @@ def converter_json_para_txt(conteudo_json: str) -> str:
     return nome
 
 
-def test_nome_com_valor():
-    resultado = converter_json_para_txt('{"nome": "Marco"}')
-    assert resultado == "Marco"
-
-
-def test_nome_com_espacos():
-    resultado = converter_json_para_txt('{"nome": "  Marco  "}')
-    assert resultado == "  Marco  "
-
-
-def test_nome_com_caracteres_especiais():
-    resultado = converter_json_para_txt('{"nome": "M@rc0!"}')
-    assert resultado == "M@rc0!"
-
-
 def obter_mensagem():
     """
     Retorna uma mensagem de exemplo.
