@@ -1,4 +1,3 @@
-import pytest
 
 from python_pdm_template.utils import converter_json_para_txt
 

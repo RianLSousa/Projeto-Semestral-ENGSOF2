@@ -1,6 +1,4 @@
-"""
-Módulo com funções utilitárias do projeto.
-"""
+"""Módulo com funções utilitárias do projeto."""
 import json
 
 """
@@ -24,9 +22,7 @@ def somar(a: int | float, b: int | float):
 
 
 def converter_json_para_txt(conteudo_json: str) -> str:
-    """
-    Converte um conteúdo JSON para texto retornando o valor do campo "nome".
-    """
+    """Converta um conteúdo JSON para texto retornando o valor do campo "nome"."""
     if not conteudo_json.strip():
         raise ValueError("JSON vazio.")
 
