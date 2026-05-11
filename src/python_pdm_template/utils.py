@@ -1,3 +1,5 @@
+import json
+
 """
 Este módulo contém funções utilitárias para o projeto.
 
@@ -16,6 +18,20 @@ def somar(a: int | float, b: int | float):
     :return: A soma de a e b.
     """
     return a + b
+
+
+def converter_json_para_txt(conteudo_json: str) -> str:
+    if not conteudo_json.strip():
+        raise ValueError("JSON vazio.")
+
+    dados: dict[str, object] = json.loads(conteudo_json)
+
+    nome = dados.get("nome")
+
+    if not isinstance(nome, str) or not nome.strip():
+        raise ValueError("Campo 'nome' inválido.")
+
+    return nome
 
 
 def obter_mensagem():
