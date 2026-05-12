@@ -20,6 +20,9 @@ Como construir e usar:
 from python_pdm_template.utils import somar
 
 
+def converter():
+    print("Converter arquivo...")
+
 def main():
     """Função principal que exibe uma mensagem de boas-vindas."""
     print("Hello, Python PDM Template!")
