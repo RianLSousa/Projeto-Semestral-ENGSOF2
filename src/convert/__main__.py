@@ -17,7 +17,7 @@ Como construir e usar:
    ```
 """
 
-from python_pdm_template.utils import somar
+from convert.utils import somar
 
 
 def main():

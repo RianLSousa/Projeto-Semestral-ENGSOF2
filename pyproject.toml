@@ -1,5 +1,5 @@
 [project]
-name = "python_pdm_template"
+name = "convert"
 version = "0.1.0"
 description = "Template for Python PDM-based projects"
 authors = [{ name = "None", email = "none@domain.com" }]

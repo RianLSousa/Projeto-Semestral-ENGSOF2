@@ -1,6 +1,6 @@
 import pytest
 
-from python_pdm_template.utils import obter_mensagem, somar
+from convert.utils import obter_mensagem, somar
 
 
 def somar(a: int | float, b: int | float):

@@ -11,7 +11,7 @@ comportamentos durante o teste.
 O objetivo é demonstrar como usar o pytest e seus recursos para criar testes eficazes.
 """
 
-from python_pdm_template.utils import obter_mensagem, somar
+from convert.utils import obter_mensagem, somar
 
 # Teste simples
 
