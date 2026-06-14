@@ -1,3 +1,5 @@
+"""Gerencie as operações de conversão de arquivos."""
+
 from pathlib import Path
 
 from .validacao import validar_arquivo
@@ -6,10 +8,11 @@ from .arquivos import gerar_nome_disponivel
 from .conversoes.txt_md import txt_para_md
 from .conversoes.md_txt import md_para_txt
 
-
 class Conversor:
+    """Gerencie as operações de conversão de arquivos."""
 
     def __init__(self):
+        """Inicialize o conversor."""
         self.cancelado = False
 
     def converter(
@@ -17,8 +20,8 @@ class Conversor:
         arquivo_entrada: str,
         formato_saida: str,
         diretorio_saida: str,
-    ) -> dict:
-
+        ) -> dict: 
+        """Realize a conversão de um arquivo para o formato desejado."""
         validar_arquivo(
             arquivo_entrada
         )
@@ -75,7 +78,7 @@ class Conversor:
         }
 
     def cancelar(self):
-
+        """Cancela o processo de conversão."""
         self.cancelado = True
 
         return {

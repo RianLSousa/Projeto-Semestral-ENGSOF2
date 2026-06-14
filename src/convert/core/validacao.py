@@ -1,3 +1,5 @@
+"""Valide arquivos para conversão."""
+
 from pathlib import Path
 
 EXTENSOES_SUPORTADAS = {
@@ -10,7 +12,7 @@ EXTENSOES_SUPORTADAS = {
 
 
 def validar_arquivo(arquivo: str):
-
+    """Valida se o arquivo existe, não está vazio e possui extensão suportada."""
     caminho = Path(arquivo)
 
     if not caminho.exists():

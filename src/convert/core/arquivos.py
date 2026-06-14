@@ -1,10 +1,11 @@
-from pathlib import Path
+"""Funções auxiliares para manipulação de arquivos."""
 
+from pathlib import Path
 
 def gerar_nome_disponivel(
     caminho_saida: Path
 ) -> Path:
-
+    """Gera um novo nome caso o arquivo já exista."""
     if not caminho_saida.exists():
         return caminho_saida
 
