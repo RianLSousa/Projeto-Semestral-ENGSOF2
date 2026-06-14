@@ -1,26 +1,16 @@
 from pathlib import Path
 
+from .validacao import validar_arquivo
+from .arquivos import gerar_nome_disponivel
+
+from .conversoes.txt_md import txt_para_md
+from .conversoes.md_txt import md_para_txt
+
 
 class Conversor:
 
     def __init__(self):
         self.cancelado = False
-
-    def validar_arquivo(self, arquivo: str) -> bool:
-
-        caminho = Path(arquivo)
-
-        if not caminho.exists():
-            raise FileNotFoundError(
-                f"Arquivo não encontrado: {arquivo}"
-            )
-
-        if caminho.stat().st_size == 0:
-            raise ValueError(
-                "Arquivo está vazio e não pode ser convertido"
-            )
-
-        return True
 
     def converter(
         self,
@@ -29,44 +19,60 @@ class Conversor:
         diretorio_saida: str,
     ) -> dict:
 
-        self.validar_arquivo(arquivo_entrada)
+        validar_arquivo(
+            arquivo_entrada
+        )
+
+        entrada = Path(
+            arquivo_entrada
+        )
+
+        Path(
+            diretorio_saida
+        ).mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        saida = (
+            Path(diretorio_saida)
+            / f"{entrada.stem}.{formato_saida}"
+        )
+
+        saida = gerar_nome_disponivel(
+            saida
+        )
+
+        if (
+            entrada.suffix.lower() == ".txt"
+            and formato_saida == "md"
+        ):
+
+            txt_para_md(
+                entrada,
+                saida
+            )
+
+        elif (
+            entrada.suffix.lower() == ".md"
+            and formato_saida == "txt"
+        ):
+
+            md_para_txt(
+                entrada,
+                saida
+            )
+
+        else:
+
+            raise ValueError(
+                "Conversão ainda não implementada."
+            )
 
         return {
             "sucesso": True,
-            "arquivo_saida": "arquivo_convertido"
+            "arquivo_saida": str(saida)
         }
-
-    def converter_lote(
-        self,
-        arquivos: list[str],
-        formato_saida: str,
-    ) -> list[dict]:
-
-        resultados = []
-
-        for arquivo in arquivos:
-
-            try:
-
-                resultados.append(
-                    self.converter(
-                        arquivo,
-                        formato_saida,
-                        "saida"
-                    )
-                )
-
-            except Exception as erro:
-
-                resultados.append(
-                    {
-                        "sucesso": False,
-                        "arquivo": arquivo,
-                        "erro": str(erro)
-                    }
-                )
-
-        return resultados
 
     def cancelar(self):
 
