@@ -1,8 +1,9 @@
 """Testes da interface de linha de comando."""
 
+import pytest
 from unittest.mock import Mock, patch
 
-from convert.main import main
+from convert.cli.main import main
 
 
 def test_cli_sem_argumentos(capsys):
@@ -12,11 +13,13 @@ def test_cli_sem_argumentos(capsys):
         "sys.argv",
         ["convert"]
     ):
-        main()
+        with pytest.raises(SystemExit):
+            main()
 
     saida = capsys.readouterr()
 
-    assert "Uso:" in saida.out
+    # No Typer, a mensagem padrão de ajuda é exibida se nenhum comando é passado
+    assert "Usage:" in saida.out or "Usage:" in saida.err or "converter" in saida.out or "converter" in saida.err
 
 
 def test_cli_chama_conversor():
@@ -25,30 +28,35 @@ def test_cli_chama_conversor():
     conversor_mock = Mock()
 
     conversor_mock.converter.return_value = {
-        "sucesso": True
+        "sucesso": True,
+        "arquivo_saida": "saida"
     }
 
     with (
         patch(
-            "convert.main.Conversor",
+            "convert.cli.main.Conversor",
             return_value=conversor_mock
         ),
         patch(
             "sys.argv",
             [
                 "convert",
+                "converter",
                 "arquivo.txt",
+                "--formato",
                 "md",
+                "--saida",
                 "saida",
             ]
         ),
     ):
-        main()
+        with pytest.raises(SystemExit):
+            main()
 
     conversor_mock.converter.assert_called_once_with(
-        "arquivo.txt",
-        "md",
-        "saida",
+        arquivo_entrada="arquivo.txt",
+        formato_saida="md",
+        diretorio_saida="saida",
     )
 
 
@@ -57,14 +65,17 @@ def test_cli_exibe_erro(capsys):
 
     with (
         patch(
-            "convert.main.Conversor"
+            "convert.cli.main.Conversor"
         ) as mock_conversor,
         patch(
             "sys.argv",
             [
                 "convert",
+                "converter",
                 "arquivo.txt",
+                "--formato",
                 "md",
+                "--saida",
                 "saida",
             ]
         ),
@@ -76,8 +87,11 @@ def test_cli_exibe_erro(capsys):
             )
         )
 
-        main()
+        with pytest.raises(SystemExit) as excinfo:
+            main()
+
+        assert excinfo.value.code == 2
 
     saida = capsys.readouterr()
 
-    assert "Erro:" in saida.out
+    assert "Arquivo não encontrado" in saida.out
